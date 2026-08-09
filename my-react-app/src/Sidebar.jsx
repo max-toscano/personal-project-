@@ -33,7 +33,7 @@ export default function Sidebar() {
          <aside className={` ${open ? "w-64" : "w-16"} shrink-0 overflow-hidden border-r bg-slate-50 border-slate-200  duration-300 flex flex-col`}> 
             {/* Rail header. Shrink-0 so it never gets compressed by the scrolling nav below it*/}
             <div className="flex h-14 shrink-0 items-center gap-2 px-3"> 
-                <button onClick={() => setOpen()} /* button using => does declare a function its called a arrow function */
+                <button onClick={() => setOpen((v) => !v)} /* button using => does declare a function its called a arrow function */
                 className=""> 
 
                 </button>
