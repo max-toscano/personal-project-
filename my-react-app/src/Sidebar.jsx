@@ -32,12 +32,31 @@ export default function Sidebar() {
        <div className="flex h-screen bg-white font-roboto-mono text-black">
          <aside className={` ${open ? "w-64" : "w-16"} shrink-0 overflow-hidden border-r bg-slate-50 border-slate-200  duration-300 flex flex-col`}> 
             {/* Rail header. Shrink-0 so it never gets compressed by the scrolling nav below it*/}
-            <div className="flex h-14 shrink-0 items-center gap-2 px-3"> 
+            <div className="flex h-14 shrink-0 items-center gap-2 px-3">
                 <button onClick={() => setOpen((v) => !v)} /* button using => does declare a function its called a arrow function */
-                className=""> 
-
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-md hover:bg-slate-200">
+                    {open ? <PanelLeftClose size={20} /> : <PanelLeftOpen size={20} />}
                 </button>
+                {/* Brand label only shows when the rail is open */}
+                {open && <span className="truncate font-semibold">Adams</span>}
             </div>
+
+            {/* Nav list. flex-1 so it fills the remaining height below the header */}
+            <nav className="flex flex-1 flex-col gap-1 px-2">
+                {Nav.map(({ icon: Icon, label }) => (
+                    <button
+                        key={label}
+                        onClick={() => setActive(label)}
+                        className={`flex h-10 shrink-0 items-center gap-3 rounded-md px-2 hover:bg-slate-200 ${
+                            active === label ? "bg-slate-200 font-semibold" : ""
+                        }`}
+                    >
+                        <Icon size={20} className="shrink-0" />
+                        {/* Label hidden when collapsed so only the icon rail shows */}
+                        {open && <span className="truncate">{label}</span>}
+                    </button>
+                ))}
+            </nav>
 
 
          </aside>
